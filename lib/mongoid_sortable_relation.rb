@@ -1,14 +1,15 @@
 require 'rails'
 require 'mongoid'
+require 'mongoid_criteria_filter'
 
-require 'initializers/referenced/many'
-require 'initializers/referenced/many_to_many'
-require 'initializers/findable'
-require 'initializers/macros'
-require 'initializers/many'
-require 'initializers/many_to_many'
-require 'initializers/metadata'
-require 'initializers/origin_optional'
+require 'mongoid_sortable_relation/referenced/many'
+require 'mongoid_sortable_relation/referenced/many_to_many'
+require 'mongoid_sortable_relation/findable'
+require 'mongoid_sortable_relation/macros'
+require 'mongoid_sortable_relation/many'
+require 'mongoid_sortable_relation/many_to_many'
+require 'mongoid_sortable_relation/metadata'
+require 'mongoid_sortable_relation/origin_optional'
 
 module MongoidSortableRelation
 
