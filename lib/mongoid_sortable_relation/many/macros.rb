@@ -10,7 +10,7 @@ module Mongoid
 
         def reference(metadata, type = Object)
           original_reference(metadata, type)
-          if metadata.sortable?
+          if metadata.sortable? and metadata.relation == Mongoid::Relations::Referenced::Many
             to_class = metadata.class_name.classify.constantize
             to_class.field metadata.sortable_field, :type => Integer
             to_class.scope metadata.sortable_scope, -> { prepend_order_by(metadata.sortable_field => :asc) }
