@@ -5,9 +5,9 @@ describe Origin::Optional do
   describe '#prepend_order_by' do
 
     let!(:users) do
-      FactoryGirl.create :user, :name => 'Name1', :age => 2
-      FactoryGirl.create :user, :name => 'Name2', :age => 1
-      FactoryGirl.create :user, :name => 'Name3', :age => 2
+      User.create :name => 'Name1', :age => 2
+      User.create :name => 'Name2', :age => 1
+      User.create :name => 'Name3', :age => 2
     end
 
     it 'adds order' do
