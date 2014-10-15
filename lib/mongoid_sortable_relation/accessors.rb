@@ -1,6 +1,29 @@
 module Mongoid
   module Relations
     module Accessors
+
+      private
+
+      def sort_related_items(object, name, metadata)
+        if metadata.relation.macro == :has_many
+          update_sortable_field(object, metadata)
+        else
+          nullify_related_items(send(name))
+        end
+        object.each &:reload
+      end
+
+      def nullify_related_items(related_items)
+        related_items.nullify unless related_items.empty?
+      end
+
+      def update_sortable_field(object, metadata)
+        object.each_with_index do |entity, index|
+          entity.send(:"#{metadata.sortable_field}=", index + 1)
+          entity.save
+        end
+      end
+
       module ClassMethods
 
         def setter(name, metadata)
@@ -17,26 +40,8 @@ module Mongoid
           self
         end
 
-        private
-
-        def sort_related_items(object, name, metadata)
-          nullify_related_items(send(name))
-          update_sortable_field(object, metadata) if metadata.relation.macro == :has_many
-          object.each &:reload
-        end
-
-        def nullify_related_items(related_items)
-          related_items.nullify unless related_items.empty?
-        end
-
-        def update_sortable_field(object, metadata)
-          object.each_with_index do |entity, index|
-            entity.send(:"#{metadata.sortable_field}=", index + 1)
-            entity.save
-          end
-        end
-
       end
+
     end
   end
 end
