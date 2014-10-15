@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mongoid_sortable_relation (0.0.7)
+    mongoid_sortable_relation (0.0.9)
       mongoid
       mongoid_criteria_filter
 
